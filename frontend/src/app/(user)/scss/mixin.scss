@@ -1,0 +1,99 @@
+/* =========================
+   Background
+========================= */
+
+// 기본 bg (contain)
+@mixin bg($img) {
+  background-image: url($img);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+// cover (꽉 채우기)
+@mixin bg-cover($img) {
+  background-image: url($img);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+/* =========================
+   Text
+========================= */
+
+// 한줄 말줄임
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 여러줄 말줄임
+@mixin ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =========================
+   Position
+========================= */
+
+// absolute center
+@mixin pos-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes infinite-slider {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@mixin bg-gradient-image($bg-color, $bg-color-2, $img-url) {
+  background:
+    linear-gradient(
+      to bottom,
+      #{$bg-color} 0%,
+      rgba(255, 255, 255, 0) 5%,
+      rgba(255, 255, 255, 0) 95%,
+      #{$bg-color-2} 100%
+    ),
+    url(#{$img-url});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+@mixin bg-gradient-color($bg-color, $bg-color-2) {
+  background:
+    linear-gradient(
+      to bottom,
+      #{$bg-color} 50%,
+      #{$bg-color-2} 100%
+    );
+ 
+}
+.leepresso_line {
+  @include bg("/leepresso_line.png");
+  width: 100%;
+  height: 40px;
+  background-repeat: repeat;
+  animation: flow 10s linear infinite;
+  &.mt150 {
+    margin-top: 150px;
+  }
+}
+@keyframes flow {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -1000px 0;
+  }
+}

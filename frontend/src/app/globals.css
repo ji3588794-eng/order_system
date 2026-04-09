@@ -1,0 +1,113 @@
+/*깃테스트*/
+
+/* 1. 폰트 등록 */
+@font-face {
+  font-family: "Suite";
+  src:
+    url("/fonts/suite.woff2") format("woff2-variations"),
+    url("/fonts/suite.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src:
+    url("/fonts/pretendard.woff2") format("woff2"),
+    url("/fonts/pretendard.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Uiyeon";
+  src:
+    url("/fonts/uiyeon.woff2") format("woff2"),
+    url("/fonts/uiyeon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Incheon_himchan";
+  src: url("/fonts/incheon_himchan.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "incheon_jaram";
+  src: url("/fonts/incheon_jaram.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumPen";
+  src: url("/fonts/NanumPenScript-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JejuMyeongjo";
+  src: url("/fonts/JejuMyeongjo.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. 변수 설정 */
+:root {
+  --leepresso-bg: #f9f5f0;
+  --leepresso-deep: #3e3232;
+  --leepresso-point: #8d7b68;
+  --leepresso-base: #e8d5c4;
+  --leepresso-point-red: #a9443d;
+  --leepresso-point-yellow: #ffb266;
+  --leepresso-point-brown: #c46a2d;
+  --white: #fff;
+  --black: #000;
+
+  --font-suite: "Suite", sans-serif;
+  --font-pretendard: "Pretendard", sans-serif;
+  --font-uiyeon: "Uiyeon", cursive;
+  --font-pen: "NanumPen", cursive;
+  --font-jeju: "JejuMyeongjo", sans-serif;
+}
+
+html.dark {
+  --leepresso-bg: #111111;
+  --leepresso-deep: #f5f5f5;
+  --leepresso-base: #2a2a2a;
+}
+
+/* 3. Tailwind v4 테마 확장 */
+@theme {
+  --color-leepresso-bg: var(--leepresso-bg);
+  --color-leepresso-deep: var(--leepresso-deep);
+  --color-leepresso-point: var(--leepresso-point);
+  --color-leepresso-base: var(--leepresso-base);
+
+  --font-suite: var(--font-suite);
+  --font-pretendard: var(--font-pretendard);
+  --font-uiyeon: var(--font-uiyeon);
+}
+
+/* 4. 기본 스타일 */
+body {
+  background-color: var(--leepresso-bg);
+  color: var(--leepresso-deep);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  /* 기본 폰트를 Pretendard 혹은 Suite로 설정 */
+  font-family: var(--font-suite);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
