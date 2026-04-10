@@ -1,0 +1,171 @@
+@import "./mixin.scss";
+
+.header_area {
+  position: relative;
+  z-index: 100;
+
+  .header_back {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    height: 90px;
+    z-index: 20;
+
+    .header_box {
+      display: inline-block;
+      vertical-align: middle;
+
+      &.left {
+        width: 90px;
+      }
+
+      &.right {
+        width: calc(100% - 90px);
+        text-align: right;
+      }
+
+      .logo_box {
+        @include bg("../../../assets/img/header_logo.png");
+        width: 100%;
+        height: 90px;
+      }
+    }
+  }
+
+  .header_action_wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    height: 90px;
+  }
+
+  .search_wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 90px;
+    z-index: 25;
+  }
+
+  .search_icon {
+    display: inline-block;
+    @include bg("../../../assets/img/search_icon.png");
+    width: 40px;
+    height: 90px;
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+    z-index: 3;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.06);
+    }
+  }
+
+  .search_slide_box {
+    position: absolute;
+    top: 50%;
+    right: 48px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 54px;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition:
+      width 0.35s ease,
+      opacity 0.25s ease,
+      box-shadow 0.25s ease;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e7edf3;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    padding: 0 8px 0 18px;
+    backdrop-filter: blur(8px);
+
+    &.open {
+      width: 340px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      font-size: 15px;
+      color: #222;
+
+      &::placeholder {
+        color: #9aa7b3;
+      }
+    }
+
+    .search_submit {
+      height: 40px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #111 0%, #444 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        opacity: 0.92;
+      }
+    }
+  }
+
+  .mypage_icon {
+    display: inline-block;
+    @include bg("../../../assets/img/mypage_icon.png");
+    width: 50px;
+    height: 90px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+
+    &:hover {
+      transform: scale(1.06);
+    }
+
+    &.active {
+      transform: scale(1.05);
+    }
+  }
+
+  .header_dim {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 10;
+  }
+}
+
+@keyframes menuDropDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

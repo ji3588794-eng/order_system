@@ -1,3 +1,9 @@
+import "../../scss/home.scss";
+
 export default function Home() {
-  return <div className="home_back">home</div>;
+  return (
+    <div className="home_back">
+      <div className="home"></div>
+    </div>
+  );
 }
