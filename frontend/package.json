@@ -9,20 +9,27 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "16.2.3",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "sass": "^1.99.0",
-    "scss": "^0.2.4"
+    "axios": "^1.13.6",
+    "framer-motion": "^12.34.4",
+    "lucide-react": "^0.575.0",
+    "mysql2": "^3.18.2",
+    "next": "16.1.6",
+    "perlin-noise": "^0.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "recharts": "^3.8.0",
+    "sass": "^1.97.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.27",
     "eslint": "^9",
-    "eslint-config-next": "16.2.3",
-    "tailwindcss": "^4",
+    "eslint-config-next": "16.1.6",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5"
   }
 }
