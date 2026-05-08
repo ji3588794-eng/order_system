@@ -17,19 +17,20 @@
     "perlin-noise": "^0.0.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-to-print": "^3.3.0",
     "recharts": "^3.8.0",
     "sass": "^1.97.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",
-    "@types/node": "^20",
-    "@types/react": "^19",
+    "@types/node": "^20.19.39",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.27",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.2",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }

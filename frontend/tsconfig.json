@@ -23,6 +23,25 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts", "**/*.mts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts",
+    "src/app/(user)/page.jsx",
+    "src/app/(user)/layout.jsx",
+    "src/app/(user)/components/mypage/page.jsx",
+    "src/app/(user)/components/home/Home.jsx",
+    "src/app/(user)/components/mypage/layout.jsx",
+    "src/app/(user)/components/common/Header.jsx",
+    "src/app/(user)/components/common/Footer.jsx",
+    "src/app/(user)/components/mypage/layout.jsx",
+    "src/app/(user)/components/mypage/page.jsx",
+    "src/app/(user)/layout.jsx",
+    "src/app/(user)/page.jsx",
+    "src/app/(user)/page.jsx"
+  ],
   "exclude": ["node_modules"]
 }
