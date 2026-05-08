@@ -3,10 +3,8 @@
 /* 1. 폰트 등록 */
 @font-face {
   font-family: "Suite";
-  src:
-    url("/fonts/suite.woff2") format("woff2-variations"),
-    url("/fonts/suite.ttf") format("truetype");
-  font-weight: 100 900;
+  src: url("/fonts/suite.woff2") format("woff2");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -86,18 +84,6 @@ html.dark {
   --leepresso-base: #2a2a2a;
 }
 
-/* 3. Tailwind v4 테마 확장 */
-@theme {
-  --color-leepresso-bg: var(--leepresso-bg);
-  --color-leepresso-deep: var(--leepresso-deep);
-  --color-leepresso-point: var(--leepresso-point);
-  --color-leepresso-base: var(--leepresso-base);
-
-  --font-suite: var(--font-suite);
-  --font-pretendard: var(--font-pretendard);
-  --font-uiyeon: var(--font-uiyeon);
-}
-
 /* 4. 기본 스타일 */
 body {
   background-color: var(--leepresso-bg);
@@ -107,7 +93,9 @@ body {
     color 0.3s ease;
   /* 기본 폰트를 Pretendard 혹은 Suite로 설정 */
   font-family: var(--font-suite);
+  font-weight: 900;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
   word-break: keep-all;
+  margin: 0;
 }
