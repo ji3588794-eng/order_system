@@ -27,25 +27,29 @@ export default function Header() {
   }, []);
 
   const handleSearch = () => {
-    if (!keyword.trim()) return;
+    const searchText = keyword.trim();
+    if (!searchText) return;
 
-    console.log("검색어:", keyword);
-
-    // router.push(`/search?keyword=${keyword}`);
+    router.push(`/search?keyword=${encodeURIComponent(searchText)}`);
+    setSearchOpen(false);
   };
 
   return (
     <>
       <header className="header_area">
-        <div className="header_back">
-          <div className="header_box left">
-            <div className="logo_box" onClick={() => router.push("/")} style={{ cursor: "pointer" }} />
-          </div>
-
-          <div className="header_box right">
+        <div className="header_inner">
+          <div className="header_bottom">
+            <div className="header_logo_box" onClick={() => router.push("/")}>
+              <div className="header_logo"></div>
+            </div>
             <div className="header_action_wrap">
               <div className="search_wrap" ref={searchRef}>
-                <div className="search_icon" onClick={() => setSearchOpen((prev) => !prev)} />
+                <button
+                  type="button"
+                  className="search_icon"
+                  onClick={() => setSearchOpen((prev) => !prev)}
+                  aria-label="검색 열기"
+                />
 
                 <div className={`search_slide_box ${searchOpen ? "open" : ""}`}>
                   <input
@@ -65,11 +69,17 @@ export default function Header() {
                   </button>
                 </div>
               </div>
-              <div className="cart_icon" onClick={() => router.push("/")}>
-                <div className="cart_num_icon">1</div>
-              </div>
 
-              <div className="mypage_icon" onClick={() => router.push("/mypage")} />
+              <button
+                type="button"
+                className="mypage_icon"
+                onClick={() => router.push("/mypage")}
+                aria-label="마이페이지"
+              />
+
+              <button type="button" className="cart_icon" onClick={() => router.push("/cart")} aria-label="장바구니">
+                <span className="cart_num_icon">1</span>
+              </button>
             </div>
           </div>
         </div>

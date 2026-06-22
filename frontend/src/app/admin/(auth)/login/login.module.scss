@@ -1,0 +1,87 @@
+.loginWrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e2d; // $admin-primary 대입
+
+  .loginCard {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); // @include card-shadow 대입
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+
+    h1 { 
+      color: #1e1e2d; // $admin-primary 대입
+      margin-bottom: 10px; 
+    }
+    
+    p { 
+      color: #666; 
+      margin-bottom: 30px; 
+    }
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+
+      input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        outline: none;
+        &:focus { 
+          border-color: #8D7B68; // $admin-accent 대입
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #8D7B68; // $admin-accent 대입
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s;
+      
+      &:hover { 
+        background-color: #7a6a59; // darken(#8D7B68, 10%) 대입
+      }
+    }
+  }
+}
+
+.registerBox {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+
+  span {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.registerBtn {
+  width: 100%;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.registerBtn:hover {
+  background: #f5f5f5;
+}

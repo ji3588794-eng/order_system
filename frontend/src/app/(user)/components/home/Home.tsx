@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import "../../scss/home.scss";
+import "../../scss/product.scss";
+import ProductSection from "../../product/ProductSection";
 
 const categoryList = [
-  { id: 0, name: "전체", icon: "🛍️" },
-  { id: 1, name: "원두", icon: "☕" },
-  { id: 2, name: "원료", icon: "🥛" },
-  { id: 3, name: "부자재", icon: "📦" },
-  { id: 4, name: "부품", icon: "⚙️" },
+  { id: 0, name: "전체" },
+  { id: 1, name: "원두" },
+  { id: 2, name: "원료" },
+  { id: 3, name: "부자재" },
+  { id: 4, name: "부품" },
 ];
 
 const productList = [
@@ -103,7 +106,7 @@ type PaginationItem = number | "ellipsis";
 export default function Home() {
   const [selectedCate, setSelectedCate] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const router = useRouter();
   const itemsPerPage = 4;
 
   const filteredProducts = useMemo(() => {
@@ -161,9 +164,7 @@ export default function Home() {
         <div className="main_container">
           <section className="main_banner">
             <div className="main_banner__content">
-              <p className="main_banner__sub">LEEPRESSO SHOP</p>
-
-              <h2 className="main_banner__title">
+              {/* <h2 className="main_banner__title">
                 카페 운영에 필요한
                 <br />
                 모든 자재를 한곳에서
@@ -173,7 +174,7 @@ export default function Home() {
                 원두, 원료, 부자재, 부품까지
                 <br />
                 필요한 품목만 빠르게 확인하세요.
-              </p>
+              </p> */}
             </div>
           </section>
 
@@ -186,87 +187,22 @@ export default function Home() {
                   className={`main_category__item ${selectedCate === item.id ? "active" : ""}`}
                   onClick={() => handleCategoryChange(item.id)}
                 >
-                  <span className="main_category__icon">{item.icon}</span>
                   <span className="main_category__name">{item.name}</span>
                 </button>
               ))}
             </div>
           </section>
 
-          <div className="main_bottom_box">
-            <section className="main_product">
-              <div className="section_head">
-                <h3>{selectedCate === 0 ? "전체 상품" : currentCategoryName}</h3>
-                <p>
-                  총 <strong>{filteredProducts.length}</strong>개의 상품
-                </p>
-              </div>
-
-              <div className="main_product__grid">
-                {pagedProducts.map((item) => (
-                  <div key={item.id} className="main_product__card">
-                    <div className="main_product__thumb"></div>
-
-                    <div className="main_product__info">
-                      <p className="main_product__name">{item.name}</p>
-                      <p className="main_product__desc">{item.desc}</p>
-                      <p className="main_product__price">{item.price}</p>
-
-                      <button type="button" className="main_product__button">
-                        상품 보기
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {totalPages >= 1 && (
-                <div className="main_pagination">
-                  <div className="main_pagination__center">
-                    <div className="main_pagination__numbers">
-                      <button
-                        type="button"
-                        className="main_pagination__number"
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        aria-label="이전 페이지"
-                      >
-                        &lt;
-                      </button>
-
-                      {paginationItems.map((item, index) =>
-                        item === "ellipsis" ? (
-                          <span key={`ellipsis-${index}`} className="main_pagination__ellipsis" aria-hidden="true">
-                            …
-                          </span>
-                        ) : (
-                          <button
-                            key={item}
-                            type="button"
-                            className={`main_pagination__number ${currentPage === item ? "active" : ""}`}
-                            onClick={() => handlePageChange(item)}
-                            aria-current={currentPage === item ? "page" : undefined}
-                          >
-                            {item}
-                          </button>
-                        ),
-                      )}
-
-                      <button
-                        type="button"
-                        className="main_pagination__number"
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        aria-label="다음 페이지"
-                      >
-                        &gt;
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </section>
-          </div>
+          <ProductSection
+            title={selectedCate === 0 ? "전체 상품" : currentCategoryName}
+            total={filteredProducts.length}
+            products={pagedProducts}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            paginationItems={paginationItems}
+            onPageChange={handlePageChange}
+            onDetail={(id) => router.push(`/detail/${id}`)}
+          />
         </div>
       </div>
     </div>

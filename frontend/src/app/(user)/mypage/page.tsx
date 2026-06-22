@@ -5,6 +5,23 @@ import { useRouter } from "next/navigation";
 
 export default function Mypage() {
   const router = useRouter();
+  const noticeList = [
+    {
+      id: 1,
+      title: "2026년 5월 무인카페 머신 정기 점검 안내",
+      date: "2026.05.14",
+    },
+    {
+      id: 2,
+      title: "쇼핑몰 서버 점검 안내",
+      date: "2026.05.10",
+    },
+    {
+      id: 3,
+      title: "신규 원두 라인업 출시 안내",
+      date: "2026.05.02",
+    },
+  ];
 
   const currentOrders = [
     {
@@ -58,21 +75,18 @@ export default function Mypage() {
     <div className="mypage_area">
       <div className="mypage_back">
         <section className="mypage_user_card">
-          <div className="mypage_user_left">
-            <div className="mypage_user_info">
-              <div className="mypage_label">회원정보</div>
+          <div className="mypage_user_info">
+            <div className="mypage_label">MY ACCOUNT</div>
 
-              <div className="mypage_user_name">리프레소 점주님</div>
+            <div className="mypage_user_name">리프레소 점주님</div>
 
-              <div className="mypage_user_email">leepresso24@naver.com</div>
-            </div>
+            <div className="mypage_user_email">leepresso24@naver.com</div>
           </div>
 
-          <button className="mypage_edit_btn" onClick={() => router.push("/mypage/edit")}>
+          <button type="button" className="mypage_edit_btn" onClick={() => router.push("/mypage/edit")}>
             정보 수정
           </button>
         </section>
-
         <section className="mypage_current_section">
           <div className="section_head">
             <div>
@@ -108,7 +122,42 @@ export default function Mypage() {
             </div>
           )}
         </section>
+        <section className="mypage_notice_section">
+          <div className="section_head">
+            <div>
+              <div className="mypage_label">Notice</div>
 
+              <div className="section_title">공지사항</div>
+            </div>
+
+            <button className="more_btn" onClick={() => router.push("/notice")}>
+              전체보기
+            </button>
+          </div>
+
+          {noticeList.length === 0 ? (
+            <div className="current_empty">
+              <div className="empty_logo">LEEPRESSO</div>
+
+              <div className="empty_text">등록된 공지사항이 없습니다.</div>
+            </div>
+          ) : (
+            <div className="notice_list">
+              {noticeList.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className="notice_item"
+                  onClick={() => router.push(`/notice/${item.id}`)}
+                >
+                  <div className="notice_title">{item.title}</div>
+
+                  <div className="notice_date">{item.date}</div>
+                </button>
+              ))}
+            </div>
+          )}
+        </section>
         <section className="mypage_order_section">
           <div className="section_head">
             <div>
@@ -117,7 +166,7 @@ export default function Mypage() {
               <div className="section_title">주문내역</div>
             </div>
             {orderHistory.length !== 0 && (
-              <button className="more_btn" onClick={() => router.push("/mypage/order")}>
+              <button className="more_btn" onClick={() => router.push("/mypage/orderlist")}>
                 전체보기
               </button>
             )}

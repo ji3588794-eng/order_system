@@ -1,6 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import ScrollToTop from "./(user)/common/ScrollToTop";
+import AuthGuard from "../app/(user)/components/AuthGuard";
 
 export const metadata: Metadata = {
   title: "Leepresso Order System",
@@ -11,10 +13,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        {/* 전역 스크롤 관리 컴포넌트 */}
-        <ScrollToTop />
+        <AuthGuard>
+          <ScrollToTop />
 
-        {children}
+          <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" strategy="afterInteractive" />
+
+          {children}
+        </AuthGuard>
       </body>
     </html>
   );

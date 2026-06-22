@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@portone/browser-sdk": "^0.1.6",
+    "@tosspayments/tosspayments-sdk": "^2.7.0",
     "axios": "^1.13.6",
     "framer-motion": "^12.34.4",
     "lucide-react": "^0.575.0",
@@ -19,7 +21,8 @@
     "react-dom": "19.2.3",
     "react-to-print": "^3.3.0",
     "recharts": "^3.8.0",
-    "sass": "^1.97.3"
+    "sass": "^1.97.3",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",

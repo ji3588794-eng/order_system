@@ -1,0 +1,138 @@
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: #111827; // Slate-900 느낌의 깊은 다크
+  color: #fff;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 32px;
+  padding-left: 10px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+
+  span {
+    color: #60a5fa;
+    font-weight: 900;
+    font-size: 0.85em;
+    margin-left: 4px;
+  }
+}
+
+.nav {
+  flex: 1;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.menuItemWrap {
+  margin-bottom: 4px;
+}
+
+.menuItem {
+  width: 100%;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    // 호버 시 살짝 오른쪽으로 이동하는 디테일
+    padding-left: 18px;
+  }
+
+  // 화살표 아이콘을 위한 스타일 (TSX에서 Lucide 아이콘 추가 시 사용)
+  .arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+  }
+}
+
+.active {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+
+  &:hover {
+    background: #2563eb;
+    padding-left: 14px; // 활성화 상태에선 이동 방지
+  }
+
+  .arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.subMenu {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  margin-left: 12px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  // 서브메뉴 등장 애니메이션
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.subMenuItem {
+  font-size: 13.5px;
+  color: #6b7280;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #e5e7eb;
+  }
+}
+
+.subActive {
+  background: rgba(37, 99, 235, 0.1);
+  color: #60a5fa;
+  font-weight: 700;
+  position: relative;
+
+  // 왼쪽에 활성화 표시 바 추가
+  &::before {
+    content: '';
+    position: absolute;
+    left: -15px; // border-left 선에 맞춤
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 14px;
+    background: #60a5fa;
+  }
+}

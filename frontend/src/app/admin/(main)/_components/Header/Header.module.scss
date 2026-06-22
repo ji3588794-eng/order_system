@@ -1,0 +1,110 @@
+.header {
+  height: 64px;
+  background-color: #ffffff;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .leftSection {
+    .clockWrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+
+      .icon {
+        color: #3b82f6;
+      }
+
+      .date {
+        color: #888;
+      }
+
+      .time {
+        font-family: 'Monaco', 'Consolas', monospace;
+        font-weight: 600;
+        color: #333;
+        letter-spacing: 0.5px;
+        margin-top:-2px;
+      }
+    }
+  }
+
+  .userMenu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .serviceBtn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #666;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #f4f4f5;
+        color: #000;
+      }
+    }
+
+    .divider {
+      width: 1px;
+      height: 14px;
+      background-color: #ddd;
+    }
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .avatar {
+        width: 30px;
+        height: 30px;
+        background-color: #f0f0f0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+      }
+
+      .userName {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #222;
+      }
+    }
+
+    .logoutBtn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid #fecaca;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #ef4444;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #fef2f2;
+        border-color: #ef4444;
+      }
+    }
+  }
+}

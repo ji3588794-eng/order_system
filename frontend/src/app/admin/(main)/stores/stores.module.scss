@@ -1,0 +1,161 @@
+/* app/admin/(main)/stores/stores.module.scss */
+
+.container {
+  min-height: 100vh;
+  padding: 24px;
+  padding-bottom: 80px;
+
+  // 헤더 영역
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+
+    .titleGroup {
+      h2 { font-size: 26px; font-weight: 800; margin: 0; color: #0f172a; letter-spacing: -0.5px; }
+      p { font-size: 14px; color: #64748b; margin: 6px 0 0; }
+    }
+
+    .addBtn {
+      display: flex; align-items: center; gap: 8px; background: #2563eb; color: #fff; border: none; padding: 10px 20px;
+      border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s;
+      &:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+    }
+  }
+
+  // 검색 섹션
+  .searchSection {
+    display: flex; align-items: center; gap: 12px; margin-top: 24px; margin-bottom: 24px; padding: 16px; 
+    background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; flex-wrap: wrap;
+
+    .searchWrapper {
+      position: relative; flex: 1; min-width: 300px; max-width: 450px;
+      .searchIcon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; }
+      input {
+        width: 100%; padding: 11px 45px 11px 42px; border: 1px solid #e2e8f0; border-radius: 10px; background: #fff; outline: none; font-size: 14px; color: #1e293b; transition: all 0.2s;
+        &:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08); }
+      }
+      .resetBtn {
+        position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #f1f5f9; border: none; width: 24px; height: 24px; border-radius: 50%; color: #94a3b8; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        &:hover { background: #e2e8f0; color: #475569; }
+      }
+    }
+    .countInfo { margin-left: auto; font-size: 14px; color: #64748b; strong { color: #2563eb; font-weight: 700; } }
+  }
+
+  // 매장 그리드 (1줄 4개)
+  .storeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    @media (max-width: 1400px) { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 640px) { grid-template-columns: 1fr; }
+  }
+
+  // 페이지네이션
+  .pagination {
+    display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 50px;
+    button {
+      min-width: 38px; height: 38px; border-radius: 8px; border: 1px solid #e2e8f0; background: #fff; color: #64748b; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s;
+      &:hover:not(:disabled) { background: #f1f5f9; color: #0f172a; border-color: #cbd5e1; }
+      &.activePage { background: #2563eb; color: #fff; border-color: #2563eb; }
+      &:disabled { opacity: 0.3; cursor: not-allowed; }
+    }
+  }
+}
+
+// 매장 카드 스타일
+.storeCard {
+  background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: all 0.3s ease; display: flex; flex-direction: column;
+  &:hover { transform: translateY(-6px); box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1); border-color: #cbd5e1; }
+  &.disabled { .thumb { filter: grayscale(1); opacity: 0.7; } .info { opacity: 0.6; } }
+
+  .thumb {
+    height: 200px; background: #f1f5f9; position: relative; border-bottom: 1px solid #f1f5f9;
+    img { width: 100%; height: 100%; object-fit: cover; }
+    .noImage { display: flex; align-items: center; justify-content: center; height: 100%; color: #94a3b8; font-size: 13px; font-weight: 700; }
+    .badge { position: absolute; top: 12px; right: 12px; padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #fff; z-index: 2;
+      &.on { background: #10b981; } &.off { background: #64748b; }
+    }
+    .statusOverlay { position: absolute; inset: 0; background: rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; color: #ef4444; font-weight: 900; font-size: 20px; border: 2px solid #ef4444; margin: 30px; border-radius: 4px; transform: rotate(-15deg); pointer-events: none; }
+  }
+
+  .info {
+    padding: 20px; flex: 1;
+    h4 { margin: 0 0 12px; font-size: 19px; font-weight: 800; color: #0f172a; }
+    .addressLine, .contactLine, .hoursLine { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; color: #475569; font-size: 14px; }
+    .addressLine p { margin: 0; line-height: 1.4; min-height: 40px; }
+    .contactLine span { font-weight: 700; color: #1e293b; }
+    .hoursLine small { color: #64748b; font-size: 13px; }
+  }
+
+  .meta { padding: 0 20px 15px; display: flex; gap: 15px; font-size: 12px; color: #94a3b8; border-bottom: 1px solid #f8fafc; }
+
+  .btnGroup {
+    display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #f1f5f9; background: #fdfdfd;
+    button {
+      padding: 14px; border: none; background: none; cursor: pointer; font-size: 13px; font-weight: 700; color: #64748b; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;
+      &:first-child { border-right: 1px solid #f1f5f9; }
+      &:hover { background: #f8fafc; color: #0f172a; }
+    }
+    .delBtn:hover { background: #fef2f2; color: #ef4444; }
+  }
+}
+
+// 매장 상세 모달
+.modalOverlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px); }
+.modalContent {
+  background: #fff; padding: 30px; border-radius: 16px; width: 95%; max-width: 720px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  
+  h3 { margin: 0 0 25px; font-size: 22px; font-weight: 800; color: #0f172a; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+
+  form { display: flex; flex-direction: column; gap: 14px; }
+
+  .inputRow {
+    display: flex; flex-direction: column; gap: 8px;
+    label { display: block; font-size: 13px; font-weight: 800; color: #475569; text-transform: uppercase; }
+    input, select, textarea { 
+      width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; background: #f8fafc; outline: none; transition: 0.2s; 
+      &:focus { background: #fff; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+    }
+    textarea { min-height: 100px; resize: none; padding: 14px; }
+  }
+
+  .inputHalfWrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  // 이미지 정사각형 고정 디자인
+  .thumbUpload {
+    width: 100%; max-width: 280px; margin: 0 auto 10px;
+    .uploadPlaceholder, .previewBox {
+      width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 2px dashed #cbd5e1; background: #f8fafc; cursor: pointer; position: relative; transition: 0.2s;
+      &:hover { border-color: #2563eb; background: #f1f5f9; }
+      img { width: 100%; height: 100%; object-fit: cover; }
+      .removeBtn { position: absolute; top: 12px; right: 12px; background: rgba(15, 23, 42, 0.7); color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; z-index: 10; &:hover { background: #ef4444; } }
+      span { color: #94a3b8; font-weight: 700; font-size: 14px; }
+    }
+  }
+
+  // 라디오 버튼 정렬 (노출/미노출 옆에 버튼 오게 수정)
+  .radioGroup {
+    display: flex; gap: 24px; padding: 8px 0;
+    label {
+      display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; color: #475569; margin: 0; text-transform: none;
+      input[type="radio"] { width: 18px; height: 18px; cursor: pointer; margin: 0; }
+    }
+  }
+
+  .modalBtns {
+    display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #f1f5f9;
+    button { min-width: 120px; height: 48px; border-radius: 10px; font-weight: 800; cursor: pointer; border: none; font-size: 15px; }
+    .cancelBtn { background: #f1f5f9; color: #475569; &:hover { background: #e2e8f0; } }
+    .saveBtn { background: #2563eb; color: #fff; &:hover { background: #1d4ed8; } &:disabled { opacity: 0.6; cursor: not-allowed; } }
+  }
+}
+
+.empty {
+  grid-column: 1 / -1; text-align: center; padding: 100px 0; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1;
+  .emptyText { font-weight: 600; font-size: 15px; color: #94a3b8; }
+}
