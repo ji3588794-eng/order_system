@@ -1,0 +1,99 @@
+ALTER TABLE stores COMMENT = '거래처/매장 기본 정보';
+
+ALTER TABLE stores
+  MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '거래처/매장 고유 ID',
+  MODIFY store_code VARCHAR(50) NULL COMMENT '거래처 코드(세금계산서 발행코드와 동일하게 사용 가능)',
+  MODIFY store_name VARCHAR(120) NOT NULL COMMENT '매장명',
+  MODIFY tax_invoice_code VARCHAR(50) NULL COMMENT '세금계산서 발행코드',
+  MODIFY tax_invoice_name VARCHAR(120) NULL COMMENT '매장명 표시값(기존 세금계산서 발행명 호환 컬럼)',
+  MODIFY machine_vendor VARCHAR(120) NULL COMMENT '머신매입처',
+  MODIFY device_number VARCHAR(120) NULL COMMENT '기기번호',
+  MODIFY owner_name VARCHAR(50) NULL COMMENT '점주/대표자명',
+  MODIFY owner_phone VARCHAR(30) NULL COMMENT '점주/대표자 연락처',
+  MODIFY contact_phone2 VARCHAR(30) NULL COMMENT '추가 연락처',
+  MODIFY business_number VARCHAR(30) NULL COMMENT '사업자등록번호',
+  MODIFY address1 VARCHAR(255) NULL COMMENT '주소1',
+  MODIFY address2 VARCHAR(255) NULL COMMENT '주소2',
+  MODIFY as_content VARCHAR(255) NULL COMMENT 'A/S 내용',
+  MODIFY machine_name VARCHAR(120) NULL COMMENT '설치 머신명(표시/호환용)',
+  MODIFY bean_name VARCHAR(120) NULL COMMENT '사용 원두명',
+  MODIFY closure_status VARCHAR(20) NOT NULL DEFAULT '운영중' COMMENT '영업상태: 운영중, 폐업',
+  MODIFY installed_at DATE NULL COMMENT '설치일자',
+  MODIFY filter_replaced_at DATE NULL COMMENT '필터교체일자',
+  MODIFY payment_type ENUM('PREPAID','MONTHLY','SPECIAL') NOT NULL DEFAULT 'PREPAID' COMMENT '기본 결제유형: PREPAID 선결제, MONTHLY 월결제, SPECIAL 별도협의',
+  MODIFY memo TEXT NULL COMMENT '거래처/매장 메모',
+  MODIFY is_active TINYINT(1) NOT NULL DEFAULT 1 COMMENT '사용 여부: 1 사용, 0 미사용',
+  MODIFY created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
+  MODIFY updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시';
+
+ALTER TABLE stores DROP COLUMN as_status;
+
+ALTER TABLE machine_catalogs COMMENT = '머신 기본 카탈로그';
+ALTER TABLE machine_catalogs
+  MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '머신 카탈로그 고유 ID',
+  MODIFY machine_code VARCHAR(50) NOT NULL COMMENT '머신 코드',
+  MODIFY company_name VARCHAR(120) NULL COMMENT '머신회사명',
+  MODIFY machine_name VARCHAR(120) NOT NULL COMMENT '머신명',
+  MODIFY model_name VARCHAR(120) NULL COMMENT '모델명',
+  MODIFY memo TEXT NULL COMMENT '머신 카탈로그 메모',
+  MODIFY is_active TINYINT(1) NOT NULL DEFAULT 1 COMMENT '사용 여부: 1 사용, 0 미사용',
+  MODIFY created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
+  MODIFY updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시';
+
+ALTER TABLE machine_catalog_items COMMENT = '머신 카탈로그별 기본 품목';
+ALTER TABLE machine_catalog_items
+  MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '머신 기본 품목 고유 ID',
+  MODIFY machine_catalog_id BIGINT UNSIGNED NOT NULL COMMENT '머신 카탈로그 ID',
+  MODIFY item_id BIGINT UNSIGNED NOT NULL COMMENT '품목 ID',
+  MODIFY memo TEXT NULL COMMENT '머신 기본 품목 메모',
+  MODIFY is_active TINYINT(1) NOT NULL DEFAULT 1 COMMENT '사용 여부: 1 사용, 0 미사용',
+  MODIFY created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
+  MODIFY updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시';
+
+ALTER TABLE items
+  MODIFY purchase_price BIGINT NOT NULL DEFAULT 0 COMMENT '입고단가',
+  MODIFY sale_price BIGINT NOT NULL DEFAULT 0 COMMENT '출고단가';
+
+ALTER TABLE store_items
+  MODIFY store_sale_price BIGINT NULL COMMENT '거래처별 출고단가';
+
+ALTER TABLE orders
+  MODIFY request_channel ENUM('KAKAO','PHONE','SMS','ADMIN','SHOP','ETC') NOT NULL DEFAULT 'ADMIN' COMMENT '주문 접수 경로: ADMIN 관리자입력, SHOP 사용자페이지, KAKAO 카카오톡, PHONE 전화, SMS 문자, ETC 기타',
+  MODIFY payment_type ENUM('PREPAID','MONTHLY','SPECIAL') NOT NULL DEFAULT 'PREPAID' COMMENT '거래처 기본 결제유형 snapshot';
+
+ALTER TABLE payments
+  MODIFY amount BIGINT NOT NULL COMMENT '결제 금액';
+
+ALTER TABLE hana_b2b_transactions COMMENT = '하나은행 B2B 입출금 거래내역';
+ALTER TABLE hana_b2b_transactions
+  MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '하나은행 거래내역 고유 ID',
+  MODIFY account_number VARCHAR(120) NULL COMMENT '계좌번호',
+  MODIFY transaction_date CHAR(8) NOT NULL COMMENT '거래일자(YYYYMMDD)',
+  MODIFY transaction_time CHAR(6) NULL COMMENT '거래시각(HHMMSS)',
+  MODIFY balance_change_code VARCHAR(20) NULL COMMENT '잔액변동구분코드',
+  MODIFY transaction_amount BIGINT NOT NULL DEFAULT 0 COMMENT '거래금액',
+  MODIFY outline VARCHAR(255) NULL COMMENT '적요',
+  MODIFY branch_name VARCHAR(120) NULL COMMENT '취급점명',
+  MODIFY after_balance BIGINT NOT NULL DEFAULT 0 COMMENT '거래후잔액',
+  MODIFY currency_code VARCHAR(10) NOT NULL DEFAULT 'KRW' COMMENT '통화코드',
+  MODIFY spec_serial_no VARCHAR(50) NULL COMMENT '거래명세 일련번호',
+  MODIFY detail_serial_no VARCHAR(50) NULL COMMENT '거래상세 일련번호',
+  MODIFY raw_json JSON NULL COMMENT '하나은행 원본 응답',
+  MODIFY fetched_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '조회일시',
+  MODIFY created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
+  MODIFY updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시';
+
+ALTER TABLE hana_b2b_balances COMMENT = '하나은행 B2B 계좌 잔액';
+ALTER TABLE hana_b2b_balances
+  MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '하나은행 잔액 고유 ID',
+  MODIFY account_number VARCHAR(120) NOT NULL COMMENT '계좌번호',
+  MODIFY current_balance BIGINT NOT NULL DEFAULT 0 COMMENT '현재잔액',
+  MODIFY payable_amount BIGINT NOT NULL DEFAULT 0 COMMENT '지급가능금액',
+  MODIFY uncleared_check_amount BIGINT NOT NULL DEFAULT 0 COMMENT '미결제타점권금액',
+  MODIFY payment_stop_amount BIGINT NOT NULL DEFAULT 0 COMMENT '지급정지금액',
+  MODIFY send_date CHAR(8) NULL COMMENT '전송일자(YYYYMMDD)',
+  MODIFY send_time CHAR(6) NULL COMMENT '전송시각(HHMMSS)',
+  MODIFY raw_json JSON NULL COMMENT '하나은행 원본 응답',
+  MODIFY fetched_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '조회일시',
+  MODIFY created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
+  MODIFY updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시';

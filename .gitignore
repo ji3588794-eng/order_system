@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.next/
+frontend/.next/
+frontend/*.log
+backend/*.log
+.DS_Store
